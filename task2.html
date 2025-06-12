@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Note App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #c2e9fb, #f9f9f9, #fbc2eb);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .notes-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .note {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s;
+    }
+
+    .note:hover {
+      transform: scale(1.02);
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      border: none;
+      outline: none;
+      resize: none;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+    }
+
+    .plus-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      border: none;
+      background-color: #ffd700;
+      color: #333;
+      border-radius: 50%;
+      margin-top: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .note.active .plus-btn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Note App</h1>
+    <div id="notesContainer" class="notes-container"></div>
+  </div>
+
+  <script>
+    function addNote() {
+      const notesContainer = document.getElementById("notesContainer");
+
+      const noteDiv = document.createElement("div");
+      noteDiv.className = "note";
+
+      const textarea = document.createElement("textarea");
+      textarea.placeholder = "Write your note here...";
+
+      const plusBtn = document.createElement("button");
+      plusBtn.className = "plus-btn";
+      plusBtn.innerText = "+";
+      plusBtn.onclick = () => {
+        noteDiv.classList.add("active");
+        addNote();
+      };
+      noteDiv.ondblclick = () => {
+        notesContainer.removeChild(noteDiv);
+        alert("Note removed successfully!");
+      };
+
+      noteDiv.appendChild(textarea);
+      noteDiv.appendChild(plusBtn);
+      notesContainer.appendChild(noteDiv);
+    }
+    addNote();
+  </script>
+</body>
+</html>
